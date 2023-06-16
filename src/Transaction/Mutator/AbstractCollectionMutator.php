@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace BitWasp\Bitcoin\Transaction\Mutator;
 
-abstract class AbstractCollectionMutator implements \Iterator, \ArrayAccess, \Countable
+use Traversable;
+
+abstract class AbstractCollectionMutator implements \ArrayAccess, \Countable, \IteratorAggregate
 {
     /**
      * @var \SplFixedArray
@@ -18,6 +20,12 @@ abstract class AbstractCollectionMutator implements \Iterator, \ArrayAccess, \Co
     {
         return $this->set->toArray();
     }
+
+    public function getIterator(): Traversable
+    {
+        return $this->set->getIterator();
+    }
+
 
     /**
      * @return bool
